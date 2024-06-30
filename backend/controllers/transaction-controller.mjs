@@ -1,13 +1,5 @@
-// transaction-controller.mjs
-
-import {
-  redisServer,
-  transactionPool,
-  wallet,
-  blockchain,
-} from '../server.mjs';
+import { transactionPool, wallet, blockchain } from '../server.mjs';
 import Miner from '../models/Miner.mjs';
-import Wallet from '../models/Wallet.mjs';
 
 export const addTransaction = (req, res, next) => {
   let { amount, recipient } = req.body;
@@ -29,7 +21,6 @@ export const addTransaction = (req, res, next) => {
   }
 
   transactionPool.addTransaction(transaction);
-  redisServer.broadcastTransaction(transaction);
 
   res.status(201).json({ success: true, statusCode: 201, data: transaction });
 };
@@ -56,7 +47,6 @@ export const mineTransactions = (req, res, next) => {
     blockchain,
     transactionPool,
     wallet,
-    pubsub: redisServer,
   });
 
   const minedBlock = miner.mineTransaction();

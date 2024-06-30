@@ -65,18 +65,22 @@ app.use('/api/v1/wallet', transactionRouter);
 app.use(errorHandler);
 
 const synchronize = async () => {
-  let response;
   try {
-    response = await fetch(`${ROOT_NODE}/api/v1/blockchain`);
-    if (response.ok) {
-      const result = await response.json();
-      blockchain.replaceChain(result.data);
+    const blockchainResponse = await fetch(`${ROOT_NODE}/api/v1/blockchain`);
+    if (blockchainResponse.ok) {
+      const blockchainData = await blockchainResponse.json();
+      redisServer.broadcast({
+        channel: 'BLOCKCHAIN',
+        message: JSON.stringify(blockchainData.data),
+      });
     }
 
-    response = await fetch(`${ROOT_NODE}/api/v1/wallet/transactions`);
-    if (response.ok) {
-      const result = await response.json();
-      transactionPool.replaceTransactionMap(result.data);
+    const transactionResponse = await fetch(
+      `${ROOT_NODE}/api/v1/wallet/transactions`,
+    );
+    if (transactionResponse.ok) {
+      const transactionData = await transactionResponse.json();
+      redisServer.broadcastTransaction(transactionData.data);
     }
   } catch (error) {
     console.error('Error synchronizing data:', error);
