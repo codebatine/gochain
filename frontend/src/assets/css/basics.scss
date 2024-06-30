@@ -1,0 +1,62 @@
+$soft-green: #88B04B;
+$light-gray: #CFD8DC;
+$warm-beige: #D9B99B;
+$cream-white: #F5F5F5;
+
+$hover-link: (
+  cursor: pointer,
+  color: $cream-white,
+  background: $light-gray,
+);
+
+@mixin hover-link {
+  cursor: map-get($hover-link, cursor);
+  color: map-get($hover-link, color);
+}
+
+@mixin hover-link-h1 {
+  cursor: map-get($hover-link, cursor);
+  color: map-get($hover-link, color);
+}
+
+@mixin hover-link-button {
+  cursor: map-get($hover-link, cursor);
+  color: map-get($hover-link, color);
+  border: map-get($hover-link, border);
+}
+
+@mixin hover-link-mine {
+  cursor: map-get($hover-link, cursor);
+  border: map-get($hover-link, border2);
+  background: $soft-green;
+}
+
+$font-size-30: 3rem;
+$font-size-25: 2.5rem;
+$font-size-20: 2rem;
+$font-size-15: 1.5rem;
+$font-size-10: 1rem;
+
+html, body {
+  height: 100%;
+  color: $cream-white;
+  display: flex;
+  flex-direction: column;
+  color: #000;
+
+  #root {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+
+    main {
+      display: flex;
+      min-height: 87vh;
+      color: black;
+      padding: 20px;
+      overflow-y: auto;
+    }
+  }
+}

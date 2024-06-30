@@ -1,0 +1,67 @@
+.explorer-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2{
+    margin-top: 40px;
+    text-align: center;
+    font-size: $font-size-20;
+  }
+
+  .show-blocks {
+    width: 80%;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 50px;
+    margin-top: 20px;
+  }
+
+  .connector{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .block{
+    overflow: auto;
+    padding: 5px;
+    border: 5px solid $warm-beige;
+    background-color: $cream-white;
+    word-wrap: break-word;
+    color: #000;
+
+    h3{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: $font-size-15;
+      padding: 5px;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-color: $soft-green;
+      margin: 8px 8px;
+    }
+
+    .blockchain-single{
+      font-size: large;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      padding: 5px;
+    }
+
+    .blockchain-multi{
+      font-size: large;
+      display: flex;
+      flex-wrap: nowrap;
+      flex-direction: column;
+
+      .blockchain-value{
+        padding: 5px;
+      }
+    }
+  }
+}
