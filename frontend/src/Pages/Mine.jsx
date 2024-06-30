@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { listTransactions, mine } from '../services/wallet'
-import { formatTimestamp, getToken, shortenKey } from '../services/misc';
+import { formatTimestamp, getToken, shortenKey } from '../services/etc';
 import { IconBox, IconPick, IconRotateDot, IconSquareChevronsRight } from '@tabler/icons-react';
 import { Popup } from '../components/Popup';
 

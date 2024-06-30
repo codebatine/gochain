@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { calculateBalance, sendTransaction } from '../services/wallet';
 import { getMe } from '../services/auth';
-import { formatTimestamp, getToken, shortenKey } from '../services/misc';
+import { formatTimestamp, getToken, shortenKey } from '../services/etc';
 import { Popup } from '../components/Popup';
 import { IconCopyPlus, IconSquareChevronRight, IconSquarePlus } from '@tabler/icons-react';
 

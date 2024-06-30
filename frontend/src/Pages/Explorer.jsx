@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { listBlocks } from '../services/blockchain';
 import { IconBox, IconDna, IconSquareChevronsRight, IconTopologyStarRing3 } from '@tabler/icons-react';
-import { formatTimestamp, shortenKey } from '../services/misc';
+import { formatTimestamp, shortenKey } from '../services/etc';
 import { Popup } from '../components/Popup';
 
 export const Explorer = () => {

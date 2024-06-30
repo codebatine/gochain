@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getMe, update, updatePassword } from '../services/auth';
-import { getToken } from '../services/misc';
+import { getToken, shortenKey, copyToClipboard } from '../services/etc';
 import { Popup } from './Popup';
 
 export const UserInfo = ({ setShowUserProfile, userInfo, setUserInfo, handleLogout }) => {
@@ -85,12 +85,14 @@ export const UserInfo = ({ setShowUserProfile, userInfo, setUserInfo, handleLogo
           <div>
             <h2>User info</h2>
             {userInfo &&
-              <div className="userinfo">
-                <div>Email: {userInfo.email}</div>
-                <div>Name: {userInfo.fname}</div>
-                <div>Surname: {userInfo.lname}</div>
-                <div>Wallet: {userInfo.publicKey}</div>
-              </div>
+    <div className="userinfo">
+    <div>Email: {userInfo.email}</div>
+    <div>Name: {userInfo.fname}</div>
+    <div>Surname: {userInfo.lname}</div>
+    <div className="wallet-address" onClick={() => copyToClipboard(userInfo.publicKey)}>
+      Click to copy wallet address: {shortenKey(userInfo.publicKey)}
+    </div>
+  </div>
             }
           </div>
           {editInfo &&
