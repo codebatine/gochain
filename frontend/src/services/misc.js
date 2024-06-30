@@ -11,16 +11,16 @@ export const shortenKey = (address) => {
   }
 };
 
-export const copyToClipboard = (text) => {
-  navigator.clipboard
-    .writeText(text)
-    .then(() => {
-      alert('Public key copied to clipboard');
-    })
-    .catch((err) => {
-      console.error('Failed to copy: ', err);
-    });
-};
+// export const copyToClipboard = (text) => {
+//   navigator.clipboard
+//     .writeText(text)
+//     .then(() => {
+//       alert('Public key copied to clipboard');
+//     })
+//     .catch((err) => {
+//       console.error('Failed to copy: ', err);
+//     });
+// };
 
 export const formatTimestamp = (timestamp) => {
   const date = new Date(timestamp);

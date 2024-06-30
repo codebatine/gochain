@@ -5,24 +5,29 @@ export const errorHandler = (err, req, res, next) => {
 
   error.message = err.message;
 
+  // Handle CastError
   if (err.name === 'CastError') {
-    const message = `The resource with id: ${err.value} could not be found.`;
-    error = new ErrorResponse(`Information saknas: ${message}`, 400);
+    const message = `Resource with id: ${err.value} not found.`;
+    error = new ErrorResponse(message, 404);
   }
 
+  // Handle Duplicate Key Error (MongoError code 11000)
   if (err.code === 11000) {
-    const message = `The resource already excist: '${
-      Object.keys(err.keyValue)[0]
-    }'`;
+    const message = `Duplicate key error: '${Object.keys(err.keyValue)[0]}'`;
     error = new ErrorResponse(message, 400);
   }
 
+  // Handle Validation Error
   if (err.name === 'ValidationError') {
-    const message = Object.values(err.errors).map((value) => value.message);
-    error = new ErrorResponse(`Information is missing: ${message}`, 400);
+    const message = Object.values(err.errors).map((val) => val.message);
+    error = new ErrorResponse(message, 400);
   }
 
-  res.status(err.statusCode || 500).json({
+  // Log to console for debugging (optional)
+  console.error(error);
+
+  // Send response
+  res.status(error.statusCode || 500).json({
     success: false,
     statusCode: error.statusCode || 500,
     error: error.message || 'Server Error',
