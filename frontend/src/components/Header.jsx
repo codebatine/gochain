@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IconUserFilled } from '@tabler/icons-react';
+import { IconUserFilled, IconLogin } from '@tabler/icons-react';
 import { Navbar } from './Navbar';
 import { Login } from './Login';
 import { getMe } from '../services/auth';
@@ -44,7 +44,7 @@ export const Header = () => {
       <section className="first-row-wrapper">
         <div className="user-wrapper">
           {!userInfo ? (
-            <button onClick={handleClickLogin}>Go!</button>
+            <button onClick={handleClickLogin}><IconLogin/>Go!</button>
           ) : (
             <button onClick={handleClickProfile}>
               <IconUserFilled />
