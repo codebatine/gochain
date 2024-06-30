@@ -1,167 +1,117 @@
-.mine-wrapper{
+.mine-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
 
-  .mine-button{
-    margin-top:40px;
+  .mine-button {
+    margin-top: 40px;
 
-    .button-control{
-
-      button{
+    .button-control {
+      button {
         padding: 5px;
-        background-color: $light-gray;
+        background-color: $warm-beige;
         font-size: xx-large;
         color: #000;
         text-align: center;
         width: 180px;
-        height:180px;
+        height: 180px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 5px;
+        border: 2px solid transparent;
 
-        &:hover{
+        &:hover {
           @include hover-link-mine;
         }
 
-        &:active{
+        &:active {
           color: $warm-beige;
-          cursor:default;
+          cursor: default;
         }
       }
     }
   }
 
-  h2{
+  h2 {
     text-align: center;
     font-size: 2rem;
     margin-top: 40px;
   }
 
-  .pending-transactions {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .pending{
-    overflow: auto;
-    padding: 5px;
-    background-color: $light-gray;
-    margin-top: 20px;
-    word-wrap: break-word;
-    color: #000;
+  .pending-transactions, .latest-block-wrapper {
     width: 80%;
     max-width: 1024px;
-
-    h3{
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1,5rem;
-      padding: 5px;
-      text-decoration: underline;
-      margin: 8px 8px;
-    }
-
-    .pending-multi{
-      font-size: large;
-      display: flex;
-      flex-wrap:nowrap;
-      flex-direction: column;
-
-      div{
-        div{
-          padding: 5px;
-        }
-      }
-    }
-
-    .pending-single{
-      font-size: large;
-      display: flex;
-      flex-wrap:nowrap;
-      flex-direction: column;
-      padding: 5px;
-    }
-  }
-
-  .latest-block-wrapper {
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 
-    h2{
+    h2 {
       text-align: center;
       font-size: 2rem;
       margin-top: 40px;
     }
 
-    .latest-block{
+    .pending, .latest-block {
       color: #000;
       overflow: auto;
-      padding: 5px;
+      padding: 10px;
       background-color: $light-gray;
-      margin-top: 20px;
       word-wrap: break-word;
       margin-bottom: 2rem;
-      width: 80%;
-      max-width: 1024px;
+      width: 100%;
 
-      h3{
+      h3 {
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 1,5rem;
+        font-size: 1.5rem;
         padding: 5px;
-        margin: 8px 8px;
+        margin: 8px;
+        text-decoration: underline;
       }
 
-      .latest-multi{
-        color: #000;
+      .pending-multi, .latest-multi {
+        font-size: large;
         display: flex;
-        flex-wrap:nowrap;
         flex-direction: column;
-  
-        .latest-value{
+
+        .latest-value, div {
           padding: 5px;
         }
       }
-  
-      .latest-single{
-        color: #000;
+
+      .pending-single, .latest-single {
         font-size: large;
         display: flex;
-        flex-wrap:nowrap;
         flex-direction: column;
         padding: 5px;
       }
     }
   }
-}
 
-.loading-wrapper{
-  margin: 40px 0;
-  
-  .loading {
-    border: 8px solid $soft-green;
-    border-top: 8px solid $light-gray;
-    width: 80px;
-    height: 80px;
-    animation: spin 4s linear infinite;
-    margin: 0 auto;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+  .loading-wrapper {
+    margin: 40px 0;
 
-  h3{
-    text-align: center;
-    font-size: 1,5rem;
+    .loading {
+      border: 8px solid $link-blue;
+      border-top: 8px solid $light-gray;
+      width: 40px;
+      height: 40px;
+      animation: spin 4s linear infinite;
+      margin: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 1.5rem;
+    }
   }
 }

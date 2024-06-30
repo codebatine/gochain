@@ -2,7 +2,7 @@ import { createHash, ellipticHash } from '../utilities/crypto-lib.mjs';
 import { INITIAL_BALANCE } from '../utilities/settings.mjs';
 import Transaction from './Transaction.mjs';
 
-export default class Wallet {
+class Wallet {
   constructor() {
     this.balance = INITIAL_BALANCE;
     this.keyPair = ellipticHash.genKeyPair();
@@ -13,7 +13,7 @@ export default class Wallet {
     let total = 0;
     let hasAddedTransaction = false;
 
-    for (let i = chain.length - 1; i > 0; i--) {
+    for (let i = chain.length - 1; i >= 0; i--) {
       const block = chain[i];
 
       for (let transaction of block.data) {
@@ -50,3 +50,5 @@ export default class Wallet {
     return this.keyPair.sign(createHash(data));
   }
 }
+
+export default Wallet;

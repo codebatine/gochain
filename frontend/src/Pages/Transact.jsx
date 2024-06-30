@@ -1,120 +1,122 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { calculateBalance, sendTransaction } from '../services/wallet';
-import { getMe } from '../services/auth';
 import { formatTimestamp, getToken, shortenKey } from '../services/etc';
 import { Popup } from '../components/Popup';
-import { IconCopyPlus, IconSquareChevronRight, IconSquarePlus } from '@tabler/icons-react';
+import { IconCoinMoneroFilled } from '@tabler/icons-react';
 
 export const Transact = () => {
-
-  const [tx, setTx] = useState({recipient: "", amount: ""});
+  const [tx, setTx] = useState({ recipient: "", amount: "" });
   const [txInput, setTxInput] = useState("");
   const [txReceipt, setTxReceipt] = useState("");
-  const [displayPopup, setDisplayPopup] = useState("")
-  const [senderAddress, setSenderAddress] = useState("")
-  const [senderBalance, setSenderBalance] = useState("")
-
+  const [displayPopup, setDisplayPopup] = useState("");
+  const [senderInfo, setSenderInfo] = useState({ address: "", balance: "" });
 
   useEffect(() => {
-
-    const getInfo = async () => {
+    const fetchSenderInfo = async () => {
       try {
         const response = await calculateBalance();
-        if(response.statusCode === 200) {
-          setSenderAddress(response.data.address)
-          setSenderBalance(response.data.balance)
+        if (response.statusCode === 200) {
+          setSenderInfo({ address: response.data.address, balance: response.data.balance });
         }
       } catch (error) {
-        return setDisplayPopup({title: "Error", text: "Server error"});
+        setDisplayPopup({ title: "Error", text: "Server error" });
       }
-    }
-    getInfo();
-  }, [])
+    };
+    fetchSenderInfo();
+  }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setTx(prev => ({...prev, [name]: value}))
-  }
+    const { name, value } = e.target;
+    setTx((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const token = getToken();
-    if (!token || token === "undefined") {
-      return setDisplayPopup({title: "Error", text: 'You need to be logged in to proceed.'});
+    if (!token) {
+      return setDisplayPopup({ title: "Error", text: 'You need to be logged in to proceed.' });
     }
 
-    if(tx.recipient === (undefined || "") || tx.amount === (undefined || "")) {
-      return setDisplayPopup({title: "Error", text: "Input field(s) can not be empty."});
+    if (!tx.recipient || !tx.amount) {
+      return setDisplayPopup({ title: "Error", text: "Input field(s) cannot be empty." });
     }
 
-    const response = await sendTransaction(tx, token)
-
-    if(response.statusCode === 201){
-      setTxReceipt(response.data)
-      setTxInput(tx)
-      setTx({recipient: "", amount: ""});
+    const response = await sendTransaction(tx, token);
+    if (response.statusCode === 201) {
+      setTxReceipt(response.data);
+      setTxInput(tx);
+      setTx({ recipient: "", amount: "" });
     } else {
-      return setDisplayPopup({title: "Error", text: response.error});
+      setDisplayPopup({ title: "Error", text: response.error });
     }
-  }
+  };
 
   const formatOutputMap = (data) => {
-    if(txReceipt) {
-      const senderAddress = txReceipt.inputMap.address;
-      const senderBalance = data[senderAddress];
-    return (
-    <>
-      <div>Recipient: {txInput.recipient}</div>
-      <div>Amount to be recieved: {txInput.amount}</div>
-      <div>Sender: {shortenKey(txReceipt.inputMap.address)}</div>
-      <div>Sender remaining balance: {senderBalance}</div>
-    </>
-    )
+    if (txReceipt) {
+      const senderBalance = data[txReceipt.inputMap.address];
+      return (
+        <>
+          <div>Recipient: {txInput.recipient}</div>
+          <div>Amount to be received: {txInput.amount}</div>
+          <div>Sender: {shortenKey(txReceipt.inputMap.address)}</div>
+          <div>Sender remaining balance: {senderBalance}</div>
+        </>
+      );
     }
-  }
+  };
 
   return (
     <>
-    <main className="transact-wrapper">
-      <h2>Transaction input</h2>
-        {senderAddress && senderBalance && 
-        <div className="sender-wrapper">
-          <div className="sender-row">Sender: {shortenKey(senderAddress)}</div>
-          <div className="sender-row">Starting balance: {senderBalance}</div>
-        </div>
-        }
-      <form onSubmit={handleSubmit}>
-        <div className="form-control">
-          <label htmlFor="tx-recipient">Recipient: </label>
-          <input type="text" id="tx-recipient" name="recipient" value={tx?.recipient || ""} onChange={handleChange} autoComplete="off"></input>
-        </div>
-        <div className="form-control">
-          <label htmlFor="tx-amount">Amount: </label>
-          <input id="tx-amount" name="amount" type="number" value={tx?.amount || ""} onChange={handleChange} autoComplete="off"></input>
-        </div>
-        <div className="button-control" onClick={handleSubmit}>
-          <button>Send</button>
-        </div>
-      </form>
-      <section className="receipt-wrapper">
-      {txReceipt &&
-          <>
-          <h2>Transaction receipt</h2>
-          <div className="receipt">
-          <h3> <IconSquareChevronRight/> Transaction added to queue:</h3>
-            <div className="receipt-multi">{formatOutputMap(txReceipt.outputMap)}</div>
-            <br/>
-            <div className="receipt-single">Transaction id: {txReceipt.id}</div>
-            <div className="receipt-single">Time and date: {formatTimestamp(txReceipt.inputMap.timestamp)}</div>
+      <main className="transact-wrapper">
+        <h2><IconCoinMoneroFilled /> Send</h2>
+        {senderInfo.address && senderInfo.balance && (
+          <div className="sender-info">
+            <div className="info-item">Sender: {shortenKey(senderInfo.address)}</div>
+            <div className="info-item">Starting balance: {senderInfo.balance}</div>
           </div>
-          </>
-      }
-            </section>
-    </main>
-    {displayPopup !== "" &&
-    <Popup setDisplayPopup={setDisplayPopup} displayPopup={displayPopup}/>
-  }
+        )}
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="tx-recipient">Recipient:</label>
+            <input
+              type="text"
+              id="tx-recipient"
+              name="recipient"
+              value={tx.recipient}
+              onChange={handleChange}
+              autoComplete="off"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="tx-amount">Amount:</label>
+            <input
+              type="number"
+              id="tx-amount"
+              name="amount"
+              value={tx.amount}
+              onChange={handleChange}
+              autoComplete="off"
+            />
+          </div>
+          <div className="form-actions">
+            <button type="submit">Go!</button>
+          </div>
+        </form>
+        {txReceipt && (
+          <section className="receipt-section">
+            <h2>Verification</h2>
+            <div className="receipt">
+              <h3>Transaction added to queue:</h3>
+              <div className="details">
+                {formatOutputMap(txReceipt.outputMap)}
+                <div className="detail-item">ID: {txReceipt.id}</div>
+                <div className="detail-item">Time: {formatTimestamp(txReceipt.inputMap.timestamp)}</div>
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+      {displayPopup && <Popup setDisplayPopup={setDisplayPopup} displayPopup={displayPopup} />}
     </>
-  )
-}
+  );
+};

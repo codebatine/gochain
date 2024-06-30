@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IconUserCircle } from '@tabler/icons-react';
+import { IconUserFilled } from '@tabler/icons-react';
 import { Navbar } from './Navbar';
 import { Login } from './Login';
 import { getMe } from '../services/auth';
@@ -47,7 +47,7 @@ export const Header = () => {
             <button onClick={handleClickLogin}>Go!</button>
           ) : (
             <button onClick={handleClickProfile}>
-              <IconUserCircle />
+              <IconUserFilled />
               <div>{userInfo.fname}</div>
             </button>
           )}

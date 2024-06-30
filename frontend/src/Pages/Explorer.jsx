@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { listBlocks } from '../services/blockchain';
-import { IconBox, IconDna, IconSquareChevronsRight, IconTopologyStarRing3 } from '@tabler/icons-react';
+import { IconSquaresFilled, IconSeparatorHorizontal, IconTransactionBitcoin, IconSeparator } from '@tabler/icons-react';
 import { formatTimestamp, shortenKey } from '../services/etc';
 import { Popup } from '../components/Popup';
 
@@ -48,13 +48,13 @@ export const Explorer = () => {
             <section key={block.hash}>
             {index !== 0 ? ( 
             <div>
-              <h3> <IconBox/> Block data:</h3>
+              <h2><IconSquaresFilled/> Block</h2>
               <div className="blockchain-single">Time: {formatTimestamp(block.timestamp)}</div>
               <div className="blockchain-single">Hash: {block.hash}</div>
               <div className="blockchain-single">lastHash: {block.lastHash}</div>
               <div className="blockchain-single">Nonce: {block.nonce}</div>
               <div className="blockchain-single">Difficulty: {block.difficulty}</div>
-              <h3> <IconSquareChevronsRight/>Transactions included in this block:</h3>
+              <h2><IconTransactionBitcoin /> Transaction</h2>
               <div className="blockchain-multi">{formatLatest(block.data)}</div>
             </div>
             ) : (
@@ -69,11 +69,11 @@ export const Explorer = () => {
           <div className="connector-wrapper">
             {index !== 0 ? ( 
             <div className="connector">
-              <div><IconDna/></div>
+              <div><IconSeparatorHorizontal/></div>
             </div>
             ) : (
             <div className="connector">
-              <div><IconTopologyStarRing3/></div>
+              <div><IconSeparator/></div>
             </div>
             )}
   

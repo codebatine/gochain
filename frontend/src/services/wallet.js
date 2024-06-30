@@ -28,6 +28,17 @@ export const sendTransaction = async (data, token) => {
   }
 };
 
+export const calculateBalance = async () => {
+  try {
+    const response = await axios.get(
+      'http://localhost:5000/api/v1/wallet/info',
+    );
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const mine = async (token) => {
   try {
     const response = await axios.get(
@@ -37,17 +48,6 @@ export const mine = async (token) => {
           authorization: `Bearer ${token}`,
         },
       },
-    );
-    return response.data;
-  } catch (error) {
-    return error.response.data;
-  }
-};
-
-export const calculateBalance = async () => {
-  try {
-    const response = await axios.get(
-      'http://localhost:5000/api/v1/wallet/info',
     );
     return response.data;
   } catch (error) {
