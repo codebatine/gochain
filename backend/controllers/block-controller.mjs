@@ -1,5 +1,4 @@
 import BlockSchema from '../models/BlockModel.mjs';
-import Block from '../models/Block.mjs';
 import { blockchain, redisServer } from '../server.mjs';
 
 export const addBlock = async (req, res, next) => {

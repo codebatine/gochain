@@ -1,4 +1,4 @@
-import redis from 'redis';
+import { createClient } from 'redis';
 
 const CHANNELS = {
   BLOCKCHAIN: 'BLOCKCHAIN',
@@ -11,20 +11,31 @@ export default class RedisServer {
     this.transactionPool = transactionPool;
     this.wallet = wallet;
 
-    // Create separate Redis clients for publisher and subscriber
-    this.publisher = redis.createClient();
-    this.subscriber = redis.createClient();
+    // Initialize Redis clients
+    this.publisher = createClient();
+    this.subscriber = createClient();
 
-    // Handle errors on Redis clients
-    this.publisher.on('error', (err) => {
-      console.error('Redis publisher error:', err);
-    });
-    this.subscriber.on('error', (err) => {
-      console.error('Redis subscriber error:', err);
-    });
+    // Handle errors
+    this.publisher.on('error', (err) =>
+      console.error('Publisher Redis Client Error:', err),
+    );
+    this.subscriber.on('error', (err) =>
+      console.error('Subscriber Redis Client Error:', err),
+    );
 
-    this.loadChannels();
+    // Connect to Redis
+    this.publisher
+      .connect()
+      .then(() => console.log('Publisher connected to Redis'));
+    this.subscriber
+      .connect()
+      .then(() => {
+        console.log('Subscriber connected to Redis');
+        this.loadChannels();
+      })
+      .catch((err) => console.error('Subscriber connection error:', err));
 
+    // Ensure that the message handler is a function
     this.subscriber.on('message', (channel, message) =>
       this.messageHandler(channel, message),
     );
@@ -45,33 +56,46 @@ export default class RedisServer {
   }
 
   loadChannels() {
-    Object.values(CHANNELS).forEach((channel) =>
-      this.subscriber.subscribe(channel),
-    );
+    Object.values(CHANNELS).forEach((channel) => {
+      this.subscriber
+        .subscribe(channel)
+        .then(() => {
+          console.log(`Subscribed to channel: ${channel}`);
+        })
+        .catch((err) =>
+          console.error(`Failed to subscribe to channel: ${channel}`, err),
+        );
+    });
   }
 
   messageHandler(channel, message) {
-    const msg = JSON.parse(message);
+    try {
+      const msg = JSON.parse(message);
 
-    if (channel === CHANNELS.BLOCKCHAIN) {
-      console.log('Received blockchain message');
-      this.blockchain.replaceChain(msg, true, () => {
-        this.transactionPool.clearBlockTransactions({ chain: msg });
-      });
-    }
-
-    if (channel === CHANNELS.TRANSACTION) {
-      if (
-        !this.transactionPool.transactionExists({
-          address: this.wallet.publicKey,
-        })
-      ) {
-        this.transactionPool.addTransaction(msg);
+      if (channel === CHANNELS.BLOCKCHAIN) {
+        console.log('Received blockchain message');
+        this.blockchain.replaceChain(msg, true, () => {
+          this.transactionPool.clearBlockTransactions({ chain: msg });
+        });
       }
+
+      if (channel === CHANNELS.TRANSACTION) {
+        if (
+          !this.transactionPool.transactionExists({
+            address: this.wallet.publicKey,
+          })
+        ) {
+          this.transactionPool.addTransaction(msg);
+        }
+      }
+    } catch (error) {
+      console.error('Error handling message:', error);
     }
   }
 
   publish({ channel, message }) {
-    this.publisher.publish(channel, message);
+    this.publisher
+      .publish(channel, message)
+      .catch((err) => console.error('Publish Error:', err));
   }
 }

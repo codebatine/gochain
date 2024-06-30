@@ -14,18 +14,12 @@
         font-size: xx-large;
         color: #000;
         text-align: center;
-        width: 220px;
-        height: 80px;
+        width: 180px;
+        height:180px;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 5px;
-
-        .tabler-icon-pick{
-          width: 35px;
-          height: 35px;
-          stroke-width: 1.5;
-        }
 
         &:hover{
           @include hover-link-mine;

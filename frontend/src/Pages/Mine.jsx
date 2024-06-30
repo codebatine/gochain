@@ -108,7 +108,7 @@ export const Mine = () => {
     <main className="mine-wrapper">
       <section className="mine-button">
         <div className="button-control">
-          <button onClick={handleClick}><span>Mine</span><IconPick/></button>
+          <button onClick={handleClick}><span>Let's mine!</span><br/><br /></button>
         </div>
       </section>
 
