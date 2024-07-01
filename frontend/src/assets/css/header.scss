@@ -1,17 +1,17 @@
-header{
+header {
   width: 100%;
 
-  .first-row-wrapper{
+  .first-row-wrapper {
     display: flex;
     flex-direction: row;
     width: 100%;
     padding: 1rem;
     justify-content: center;
     align-items: center;
-    background-color: $link-blue;
-    color: #000;
-    
-    .user-wrapper{
+    background-color: #007bff;
+    color: #fff;
+
+    .user-wrapper {
       display: flex;
       flex-direction: row;
       gap: 1rem;
@@ -19,63 +19,63 @@ header{
       align-items: center;
       align-content: center;
 
-      .tabler-icon-user-circle{
+      .tabler-icon-user-circle {
         width: 30px;
         height: 30px;
         stroke-width: 1px;
       }
 
-      button{
+      button {
         padding: 10px;
-        background-color: $link-blue;
+        background-color: #007bff;
         display: flex;
         text-align: center;
         align-items: center;
         align-content: center;
         justify-content: center;
         gap: 5px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
 
-
-        &:hover{
-          @include hover-link-button;
-        }
-
-        &:active{
-          cursor:default;
+        &:hover {
+          background-color: darken(#007bff, 10%);
         }
       }
     }
   }
 }
 
-.navbar{
-  background-color:$link-blue;
-  color: #000;
+.navbar {
+  background-color: #007bff;
+  color: #fff;
   font-size: 2rem;
   padding: 2rem;
   border-bottom-left-radius: 50% 20%;
   border-bottom-right-radius: 50% 20%;
   overflow: hidden;
-  
 
-  ul{
+  ul {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 
-    li{
+    li {
       cursor: pointer;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      gap:5px;
+      padding: 10px;
 
-      &:hover{
-        @include hover-link;
-      }
-
-      &:active{
-        cursor:default;
+      &:hover {
+        background-color: darken(#007bff, 10%);
       }
     }
-    .active{
-      color: $light-gray;
+
+    .active {
+      text-decoration: underline;
     }
   }
 }
