@@ -1,12 +1,15 @@
-.explorer-wrapper{
+.explorer-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
 
-  h2{
+  h2 {
     margin-top: 40px;
     text-align: center;
     font-size: 2rem;
+    color: #333;
   }
 
   .show-blocks {
@@ -14,53 +17,57 @@
     max-width: 1024px;
     display: flex;
     flex-direction: column-reverse;
-    margin-bottom: 50px;
-    margin-top: 20px;
+    margin: 20px 0;
   }
 
-  .connector{
+  .connector-wrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 10px 0;
   }
 
-  .block{
+  .block {
     overflow: auto;
-    padding: 5px;
-    border: 5px solid $warm-beige;
-    background-color: $cream-white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     word-wrap: break-word;
-    color: #000;
+    color: #333;
 
-    h3{
+    h2 {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 5px;
-      text-decoration: underline;
-      text-underline-offset: 5px;
-      text-decoration-color: $link-blue;
-      margin: 8px 8px;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+      color: #007bff;
     }
 
-    .blockchain-single{
-      font-size: large;
+    .blockchain-single, .blockchain-multi {
+      font-size: 1rem;
       display: flex;
-      flex-wrap: nowrap;
       flex-direction: column;
-      padding: 5px;
+      padding: 10px 0;
     }
 
-    .blockchain-multi{
-      font-size: large;
-      display: flex;
-      flex-wrap: nowrap;
-      flex-direction: column;
+    .blockchain-value {
+      padding: 5px 0;
+    }
+  }
 
-      .blockchain-value{
-        padding: 5px;
-      }
+  .connector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+
+    svg {
+      font-size: 1.5rem;
+      color: #007bff;
     }
   }
 }
