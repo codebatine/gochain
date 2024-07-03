@@ -162,7 +162,7 @@ describe('Blockchain', () => {
         wallet = new Wallet();
 
         transaction = wallet.createTransaction({
-          recipient: 'Satoshi',
+          recipient: 'Saylor',
           amount: 35,
         });
         transactionReward = Transaction.transactionReward({ miner: wallet });
