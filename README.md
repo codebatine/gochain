@@ -118,7 +118,7 @@ To run this project locally, follow these steps:
    npm test
    ```
 
-## Usage :flamingo;
+## Usage :flamingo:
 
 1. **Register and log in:**
 
