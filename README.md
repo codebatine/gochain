@@ -25,7 +25,7 @@ Go-Chain is a custom cryptocurrency blockchain implementation with transaction m
 
 ### Database :floppy_disk:
 
-- Stored the blockchain, blocks, and transactions in a MongoDB database.
+- Stored the blockchain, blocks and transactions in a MongoDB database.
 
 ### Security :closed_lock_with_key:
 
@@ -61,9 +61,9 @@ To run this project locally, follow these steps:
 
    ```sh
    cd backend
-   npm install
+   npm i
    cd ../frontend
-   npm install
+   npm i
    ```
 
 3. **Run Redis server:**
@@ -93,7 +93,7 @@ To run this project locally, follow these steps:
 
 6. **Start the backend and frontend servers:**
 
-   Open two terminal windows or tabs, and run the following commands in each:
+   Open two terminal windows or tabs and run the following commands in each:
 
    **In the first terminal (backend):**
 
@@ -133,7 +133,7 @@ To run this project locally, follow these steps:
    - Mine blocks to add transactions to the blockchain and receive rewards.
 
 4. **View blockchain:**
-   - Explore the blockchain, view transactions, and monitor blocks.
+   - Explore the blockchain, view transactions and monitor blocks.
 
 ## Screenshots :camera_flash:
 

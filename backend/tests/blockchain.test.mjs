@@ -4,7 +4,6 @@ import Block from '../models/Block.mjs';
 import { createHash } from '../utilities/crypto-lib.mjs';
 import Wallet from '../models/Wallet.mjs';
 import Transaction from '../models/Transaction.mjs';
-import { blockchain } from '../server.mjs';
 
 describe('Blockchain', () => {
   let blockchain_1, blockchain_2, originalChain;
@@ -162,7 +161,7 @@ describe('Blockchain', () => {
         wallet = new Wallet();
 
         transaction = wallet.createTransaction({
-          recipient: 'Saylor',
+          recipient: 'Satoshi',
           amount: 35,
         });
         transactionReward = Transaction.transactionReward({ miner: wallet });

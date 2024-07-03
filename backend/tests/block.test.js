@@ -2,7 +2,6 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { GENESIS_DATA } from '../utilities/settings.mjs';
 import dontenv from 'dotenv';
 import Block from '../models/Block.mjs';
-import Blockchain from '../models/Blockchain.mjs';
 import { createHash } from '../utilities/crypto-lib.mjs';
 
 dontenv.config({ path: './config/config.env' });
