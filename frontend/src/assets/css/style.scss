@@ -1,12 +1,7 @@
-$link-blue: #556cb8;
-$light-gray: #CFD8DC;
-$warm-beige: #D9B99B;
-$cream-white: #F5F5F5;
-
 $hover-link: (
   cursor: pointer,
-  color: $cream-white,
-  background: $light-gray,
+  color: #F5F5F5,
+  background: #CFD8DC,
 );
 
 @mixin hover-link {
@@ -28,16 +23,16 @@ $hover-link: (
 @mixin hover-link-mine {
   cursor: map-get($hover-link, cursor);
   border: map-get($hover-link, border2);
-  background: $link-blue;
+  background: #556cb8;
 }
 
 html, body {
   height: 100%;
-  color: $cream-white;
+  color: #F5F5F5;
   display: flex;
   flex-direction: column;
   color: #000;
-  background-color: $cream-white;
+  background-color: #F5F5F5;
 
   #root {
     display: flex;
