@@ -11,8 +11,7 @@ dump.rdb
 **/build/
 
 # Testing
-/coverage
-/.jest
+/.vitest
 /test-results
 
 # VSC
