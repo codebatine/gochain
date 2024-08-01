@@ -139,19 +139,16 @@ To run this project locally, follow these steps:
 
 Here are some screenshots of the Go-Chain application in action:
 
+![Start](frontend/src/assets/screenshots/gochain-start.jpg)
+
 ### Registration and Login
 
-![Registration](path_to_screenshot1)
-![Login](path_to_screenshot2)
+![Signup](frontend/src/assets/screenshots/gochain-signup.jpg)
 
 ### Creating a Transaction
 
-![Create Transaction](path_to_screenshot3)
-
-### Mining a Block
-
-![Mine Block](path_to_screenshot4)
+![Create Transaction](frontend/src/assets/screenshots/gochain-send.jpg)
 
 ### Viewing the Blockchain
 
-![View Blockchain](path_to_screenshot5)
+![View Blockchain](frontend/src/assets/screenshots/gochain-blockexplorer.jpg)
